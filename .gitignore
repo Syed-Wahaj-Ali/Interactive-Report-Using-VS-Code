@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+*.report_env
 # Log file
 *.log
 

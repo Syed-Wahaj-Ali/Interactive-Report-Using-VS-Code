@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Financial Client Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Print / Action Buttons -->
+    <div class="no-print action-bar">
+        <button onclick="window.print()" class="btn-primary">Export to PDF</button>
+        <button onclick="resetData()" class="btn-secondary">Reset Report</button>
+    </div>
+
+    <!-- Report Container -->
+    <div class="report-container">
+        
+        <!-- Header Section -->
+        <header class="report-header">
+            <div class="logo-area">
+                <!-- Placeholder for Logo -->
+                <div class="logo-placeholder">
+                    <img src="assets/logo.png" alt="Company Logo" onerror="this.parentElement.innerText = 'LOGO PLACEHOLDER'">
+                </div>
+            </div>
+            <div class="report-info">
+                <h1>CLIENT FINANCIAL REPORT</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Fund Name:</label>
+                        <input type="text" id="fundName" value="Global Growth Fund" class="header-input">
+                    </div>
+                    <div class="info-item">
+                        <label>Account Number:</label>
+                        <input type="text" id="accountNumber" value="ACCT-8829-XJ" class="header-input">
+                    </div>
+                    <div class="info-item">
+                        <label>Reporting Period:</label>
+                        <input type="text" id="reportPeriod" value="Q1 2026" class="header-input">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <hr class="divider">
+
+        <!-- Portfolio Overview Section -->
+        <section id="portfolio-overview" class="section">
+            <div class="section-header">
+                <h2>Portfolio Overview</h2>
+                <button class="no-print btn-small" onclick="addOverviewRow()">+ Add Row</button>
+            </div>
+            <table id="overviewTable">
+                <thead>
+                    <tr>
+                        <th style="width: 40%">Security Type</th>
+                        <th style="width: 30%">Market Value ($)</th>
+                        <th style="width: 20%">% of Assets</th>
+                        <th class="no-print" style="width: 10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Rows -->
+                    <tr>
+                        <td><input type="text" value="Equity"></td>
+                        <td><input type="number" class="market-value" value="450000" oninput="calculateOverview()"></td>
+                        <td><span class="percent-assets">0%</span></td>
+                        <td class="no-print"><button class="btn-delete" onclick="deleteRow(this)">×</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="Fixed Income"></td>
+                        <td><input type="number" class="market-value" value="300000" oninput="calculateOverview()"></td>
+                        <td><span class="percent-assets">0%</span></td>
+                        <td class="no-print"><button class="btn-delete" onclick="deleteRow(this)">×</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td><strong>Total</strong></td>
+                        <td id="overviewTotalValue">$0.00</td>
+                        <td>100%</td>
+                        <td class="no-print"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- Holdings Section -->
+        <section id="holdings" class="section">
+            <div class="section-header">
+                <h2>Detailed Holdings</h2>
+                <button class="no-print btn-small" onclick="addHoldingRow()">+ Add Row</button>
+            </div>
+            <table id="holdingsTable">
+                <thead>
+                    <tr>
+                        <th style="width: 15%">Symbol</th>
+                        <th style="width: 30%">Security Name</th>
+                        <th style="width: 15%">Quantity</th>
+                        <th style="width: 15%">Unit Price ($)</th>
+                        <th style="width: 15%">Market Value ($)</th>
+                        <th class="no-print" style="width: 10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Row -->
+                    <tr>
+                        <td><input type="text" value="AAPL"></td>
+                        <td><input type="text" value="Apple Inc."></td>
+                        <td><input type="number" class="qty" value="150" oninput="calculateHoldings()"></td>
+                        <td><input type="number" class="price" value="185.50" oninput="calculateHoldings()"></td>
+                        <td><span class="holding-value">$0.00</span></td>
+                        <td class="no-print"><button class="btn-delete" onclick="deleteRow(this)">×</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="MSFT"></td>
+                        <td><input type="text" value="Microsoft Corp."></td>
+                        <td><input type="number" class="qty" value="100" oninput="calculateHoldings()"></td>
+                        <td><input type="number" class="price" value="420.00" oninput="calculateHoldings()"></td>
+                        <td><span class="holding-value">$0.00</span></td>
+                        <td class="no-print"><button class="btn-delete" onclick="deleteRow(this)">×</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td colspan="4" style="text-align: right;"><strong>Total Portfolio Value:</strong></td>
+                        <td id="holdingsTotalValue">$0.00</td>
+                        <td class="no-print"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- Performance / Cash Grid -->
+        <div class="grid-2-col">
+            
+            <!-- Performance Section -->
+            <section id="performance" class="section">
+                <h2>Performance (YTD)</h2>
+                <div class="performance-card">
+                    <div class="perf-row">
+                        <label>Monthly Return (%):</label>
+                        <input type="number" step="0.01" id="monthlyReturn" value="1.5" oninput="calculatePerformance()">
+                    </div>
+                    <div class="perf-row result">
+                        <label>YTD Return:</label>
+                        <span id="ytdReturn">0.00%</span>
+                    </div>
+                    <p class="small-text">* YTD calculated based on simplified monthly compounding projection or direct input.</p>
+                </div>
+            </section>
+
+            <!-- Cash Summary Section -->
+            <section id="cash-summary" class="section">
+                <h2>Cash Summary</h2>
+                <table class="simple-table">
+                    <tr>
+                        <td>Starting Balance</td>
+                        <td><input type="number" id="startBalance" value="50000" oninput="calculateCash()"></td>
+                    </tr>
+                    <tr>
+                        <td>Deposits</td>
+                        <td><input type="number" id="deposits" value="12000" oninput="calculateCash()"></td>
+                    </tr>
+                    <tr>
+                        <td>Withdrawals</td>
+                        <td><input type="number" id="withdrawals" value="5000" oninput="calculateCash()"></td>
+                    </tr>
+                    <tr class="total-row-simple">
+                        <td><strong>Ending Balance</strong></td>
+                        <td id="endBalance">$0.00</td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="report-footer">
+            <p>Generated on <span id="currentDate"></span> | Confidential Financial Report</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

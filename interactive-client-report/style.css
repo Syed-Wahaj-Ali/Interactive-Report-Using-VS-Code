@@ -1,0 +1,325 @@
+/* Corporate Theme Variables */
+:root {
+    --primary-color: #0f2c4c;     /* Dark Blue */
+    --secondary-color: #f4f4f4;   /* Light Grey */
+    --accent-color: #00bcd4;      /* Cyan - for subtle accents/buttons */
+    --text-color: #333;
+    --border-color: #ddd;
+    --paper-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: #eef2f5; /* Light background for the "desk" */
+    color: var(--text-color);
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Container simulating an A4 paper */
+.report-container {
+    background-color: white;
+    max-width: 210mm; /* A4 width */
+    min-height: 297mm; /* Minimum A4 height */
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: var(--paper-shadow);
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Typography */
+h1 {
+    color: var(--primary-color);
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Header */
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.logo-placeholder {
+    width: 150px;
+    height: 80px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 1px dashed #ccc;
+    font-size: 10px;
+    text-align: center;
+}
+
+.report-info {
+    text-align: right;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+.header-input {
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--primary-color);
+    width: 150px;
+}
+
+.header-input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Inputs in Tables */
+input[type="text"], input[type="number"] {
+    width: 100%;
+    border: 1px solid transparent; /* Hidden by default */
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+input[type="text"]:hover, input[type="number"]:hover {
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    background-color: #fff;
+    border: 1px solid var(--accent-color);
+    outline: none;
+}
+
+/* Specific Alignment */
+/* Right align number columns */
+td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+    text-align: right;
+}
+/* Except first column usually text */
+td:first-child, th:first-child {
+    text-align: left;
+}
+
+/* Total Rows */
+.total-row td {
+    border-top: 2px solid var(--primary-color);
+    font-weight: bold;
+    background-color: #eef4fb;
+    color: var(--primary-color);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1a4a7c;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-small {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: -40px; /* Hack to align with h2 */
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #ff4444;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.action-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+}
+
+/* Sections Layout */
+.section {
+    margin-bottom: 30px;
+}
+
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Performance Box */
+.performance-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.perf-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.perf-row label {
+    font-weight: bold;
+}
+
+.perf-row.result span {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.small-text {
+    font-size: 11px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Footer */
+.report-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #888;
+}
+
+/* Print Styling */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+
+    .report-container {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Ensure backgrounds print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    input {
+        border: none !important; /* Hide input borders on print */
+    }
+
+    /* Page Breaks */
+    h2 {
+        page-break-after: avoid;
+    }
+    
+    table {
+        page-break-inside: auto;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+}
